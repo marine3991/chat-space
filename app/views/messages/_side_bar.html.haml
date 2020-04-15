@@ -1,0 +1,18 @@
+.chat-side
+  .side-header
+    .side-header__box
+      %p.side-header__box__name
+        マリン
+      %ul.side-header__box__icon
+        %li.side-header__box__edit-name
+          = link_to "#" do
+            = icon('fas', 'edit')
+        %li.side-header__box__new-group
+          = link_to "#" do
+            = icon('fas', 'cog')
+  .side-main
+    = link_to "#", class:"side-main__group" do
+      %p.side-main__group__name
+        teamA
+      %p.side-main__group__last-message
+        お疲れ！
