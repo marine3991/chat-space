@@ -1,38 +1,26 @@
 .chat-main
   .main-header
     .main-header__group
-      %p.main-header__group__name
-        teamA
-      %p.main-header__group__menber
-        Menber : マリン
-    = link_to "#", class:"main-header__right" do
+      .main-header__group__name
+        = @group.name
+      .main-header__group__menber
+        Menber : 
+        %ul
+          - @group.users.each do |user|
+            %li= user.name
+    = link_to edit_group_path(@group), class:"main-header__right" do
       %p.main-header__right__edit
         Edit
           
-  .main-message
-    .index
-      .index__box
-        %p.index__box__name
-          マリン
-        %p.index__box__date
-          2020/4/14(Tue) 22:22:22
-      %p.index__message
-        おはよう！
-      .index__second
-        %p.index__second__name
-          マリン
-        %p.index__second__date
-          2020/4/14(Tue) 23:23:23
-      %p.index__text
-        お疲れ！
+  .main-messages
+    = render @messages
 
-  .main-form
-    %form.main-from__message
-      .input-box
-        %input{type: "text", class: "input-box__text", placeholder: "type a message"}
-        %label{class: "input-box__image"}
-          = icon('fas', 'image')
-          %input{type: "file", class: "input-box__image__file"}
-      %input{type: "submit", class: "submit-btn", value: "Send"}
-        
+  .form
+    = form_for [@group, @message] do |f|
+      = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+      .form__mask
+        = f.label :image, class: 'form__mask__image' do
+          = icon('fas', 'image', class: 'icon')
+          = f.file_field :image, class: 'hidden'
+      = f.submit 'Send', class: 'form__submit'
       
